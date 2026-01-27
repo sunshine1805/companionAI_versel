@@ -47553,7 +47553,7 @@ return s.a.uu(s.b,s.c.a.c.a.a,B.b.gap(s.d.b.b.a))},
 $S:0}
 A.a5X.prototype={
 $1(a){var s=null
-return A.kn(A.b([A.eO(B.fO,new A.a5V(a),s),A.eO(B.ml,new A.a5W(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.Zy,!1,s,B.a_8)},
+return A.kn(A.b([A.eO(B.fO,new A.a5V(a),s),A.eO(B.ml,new A.a5W(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.Zy,!1,s,B.a_7)},
 $S:30}
 A.a5V.prototype={
 $0(){A.cr(this.a,!1).eG(!1)
@@ -47870,7 +47870,7 @@ r.mV(B.BE)}},
 $S:0}
 A.atx.prototype={
 $1(a){var s=null,r=A.bF(16)
-return A.kn(A.b([A.eO(B.fO,new A.atv(a),s),A.eO(B.a_i,new A.atw(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.a_0,!1,new A.bR(r,B.n),B.a_e)},
+return A.kn(A.b([A.eO(B.fO,new A.atv(a),s),A.eO(B.a_i,new A.atw(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.a__,!1,new A.bR(r,B.n),B.a_e)},
 $S:30}
 A.atv.prototype={
 $0(){A.cr(this.a,!1).eG(!1)
@@ -47929,7 +47929,7 @@ n=A.da(A.b([q,B.cQ,o,A.bM(j,A.jx(j,j,j,B.Jz,j,j,new A.a7c(a),j,j,j,"SOS"),B.m,j,
 m=A.aK("How are you feeling today?",j,j,j,A.dc(j,j,B.cg,j,j,j,j,j,j,j,j,16,j,j,j,j,j,!0,j,j,j,j,j,j,j,j),j,j)
 o=A.bF(20)
 q=A.b([new A.co(2,B.ax,A.am(B.d.aB(76.5),B.a2.t()>>>16&255,B.a2.t()>>>8&255,B.a2.t()&255),B.Pm,15)],r)
-q=A.bM(j,A.cz(A.b([A.da(A.b([A.fc(B.IM,A.am(204,B.j.t()>>>16&255,B.j.t()>>>8&255,B.j.t()&255),j,24),B.bO,B.a_3],p),B.y,B.t,B.A,0),B.c7,B.Zz],p),B.an,B.t,B.A),B.m,j,j,new A.bC(j,j,j,o,q,B.kW,B.S),j,j,j,B.ck,j,j,j)
+q=A.bM(j,A.cz(A.b([A.da(A.b([A.fc(B.IM,A.am(204,B.j.t()>>>16&255,B.j.t()>>>8&255,B.j.t()&255),j,24),B.bO,B.a_2],p),B.y,B.t,B.A,0),B.c7,B.Zz],p),B.an,B.t,B.A),B.m,j,j,new A.bC(j,j,j,o,q,B.kW,B.S),j,j,j,B.ck,j,j,j)
 o=A.aPq(A.b([k.yJ(a,B.a2,B.J6,new A.a7d(a),"Chat support","Talk to AI"),k.yJ(a,B.aa,B.J5,new A.a7e(a),"Write feelings","Journal"),k.yJ(a,B.Ge,B.J8,new A.a7f(a),"Resources","Self-Care"),k.yJ(a,B.FQ,B.IX,new A.a7g(a),"Your progress","Insights")],p),!0,!0,!0)
 l=A.bF(16)
 r=A.b([new A.co(2,B.ax,A.am(13,B.k.t()>>>16&255,B.k.t()>>>8&255,B.k.t()&255),B.h,10)],r)
@@ -47966,7 +47966,7 @@ $0(){var s=null
 A.lF(s,s,!0,s,new A.a78(),this.a,s,!0,t.z)},
 $S:0}
 A.a78.prototype={
-$1(a){return A.kn(A.b([A.eO(B.mm,new A.a77(a),null)],t.p),B.ZP,!1,null,B.a_7)},
+$1(a){return A.kn(A.b([A.eO(B.mm,new A.a77(a),null)],t.p),B.ZP,!1,null,B.a_6)},
 $S:30}
 A.a77.prototype={
 $0(){A.cr(this.a,!1).eG(null)
@@ -48102,7 +48102,7 @@ if(b.a===B.f1)return B.eQ
 s=b.c
 if(s!=null)return A.ei(A.aK("Error: "+A.j(s),r,r,r,r,r,r),r,r)
 s=b.b
-if(s==null||s.gnx().length===0)return A.ei(A.cz(A.b([A.fc(B.pt,B.d7,r,80),B.bq,B.a_4,B.dz,A.aK("Start writing to see your entries here",r,r,r,A.dc(r,r,B.aT,r,r,r,r,r,r,r,r,14,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r)],t.p),B.y,B.c2,B.A),r,r)
+if(s==null||s.gnx().length===0)return A.ei(A.cz(A.b([A.fc(B.pt,B.d7,r,80),B.bq,B.a_3,B.dz,A.aK("Start writing to see your entries here",r,r,r,A.dc(r,r,B.aT,r,r,r,r,r,r,r,r,14,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r)],t.p),B.y,B.c2,B.A),r,r)
 return A.aeE(r,new A.adW(this.a,b,this.b),s.gnx().length,B.cj)},
 $S:138}
 A.adW.prototype={
@@ -48135,7 +48135,7 @@ return null},
 $S:0}
 A.adT.prototype={
 $1(a){var s=null,r=A.bF(16)
-return A.kn(A.b([A.eO(B.fO,new A.adR(a),s),A.eO(B.ml,new A.adS(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.a_6,!1,new A.bR(r,B.n),B.a_b)},
+return A.kn(A.b([A.eO(B.fO,new A.adR(a),s),A.eO(B.ml,new A.adS(a),A.xl(s,s,s,s,s,s,s,s,s,B.af,s,s,s,s,s,s,s,s,s,s,s))],t.p),B.a_5,!1,new A.bR(r,B.n),B.a_b)},
 $S:30}
 A.adR.prototype={
 $0(){A.cr(this.a,!1).eG(!1)
@@ -48768,7 +48768,7 @@ case 6:case 1:return A.w(q,r)
 case 2:return A.v(o.at(-1),r)}})
 return A.x($async$uL,r)},
 I(a){var s,r,q,p,o,n,m,l=this,k=null,j=A.ko(k,k,k,!0,!0,B.E,k,1,k,k,0,!1,k,!1,k,k,k,k,!0,k,k,k,k,k,B.Zl,k,k,k,1,k,!0),i=A.b([A.am(B.d.aB(229.5),B.j.t()>>>16&255,B.j.t()>>>8&255,B.j.t()&255),A.am(204,B.j.t()>>>16&255,B.j.t()>>>8&255,B.j.t()&255)],t.t_),h=A.fc(B.J1,B.o8,k,80),g=A.aK("Use your QIU email to create an account",k,k,k,A.dc(k,k,B.aT,k,k,k,k,k,k,k,k,14,k,k,k,k,k,!0,k,k,k,k,k,k,k,k),B.bR,k),f=l.w?k:l.gaeb(),e=A.aHU(k,k,B.j,k,k,k,k,k,k,k,k,k,k,k,new A.bR(A.bF(12),B.n),new A.aY(B.eY,1,B.w,-1),k,k,k,k)
-e=A.et(A.aHT(A.Pr("assets/images/google_logo.png",new A.aBU(),k,24,24),B.a_2,f,e),56,k)
+e=A.et(A.aHT(A.Pr("assets/images/google_logo.png",new A.aBU(),k,24,24),B.a_1,f,e),56,k)
 f=t.p
 s=A.da(A.b([A.fb(A.a80(B.d7),1),new A.br(B.ht,A.aK("OR",k,k,k,A.dc(k,k,B.aT,k,k,k,k,k,k,k,k,k,k,k,B.a3,k,k,!0,k,k,k,k,k,k,k,k),k,k),k),A.fb(A.a80(B.d7),1)],f),B.y,B.t,B.A,0)
 r=A.TN(l.e,A.Cn(k,new A.fi(4,A.bF(12),B.cZ),k,k,k,k,k,k,!0,k,k,k,k,k,k,B.j,!0,k,k,k,k,k,k,k,k,k,k,k,k,k,k,"student@qiu.edu.my",k,k,k,k,k,k,k,k,"QIU Email",!0,!0,k,B.px,k,k,k,k,k,k,k,k,k,k,k,k),B.mg,!1,l.ganW())
@@ -48845,7 +48845,7 @@ return null},
 $S:0}
 A.wO.prototype={
 I(a){var s=null
-return A.iM(A.ko(s,s,s,!0,!0,B.wg,s,1,s,s,s,!1,s,!1,s,s,s,s,!0,s,s,s,s,s,B.ZG,s,s,s,1,s,!0),s,new A.br(B.cj,A.cz(A.b([B.a_5,B.c7,B.ZV,B.iC,B.KH,B.KG,B.Bn,A.ei(A.Oj(!1,B.ZJ,s,s,s,s,s,s,new A.ami(a),s,A.vh(s,s,B.wg,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s)),s,s)],t.p),B.an,B.t,B.A),s),s,s)}}
+return A.iM(A.ko(s,s,s,!0,!0,B.wg,s,1,s,s,s,!1,s,!1,s,s,s,s,!0,s,s,s,s,s,B.ZG,s,s,s,1,s,!0),s,new A.br(B.cj,A.cz(A.b([B.a_4,B.c7,B.ZV,B.iC,B.KH,B.KG,B.Bn,A.ei(A.Oj(!1,B.ZJ,s,s,s,s,s,s,new A.ami(a),s,A.vh(s,s,B.wg,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s)),s,s)],t.p),B.an,B.t,B.A),s),s,s)}}
 A.ami.prototype={
 $0(){A.cr(this.a,!1).eG(null)},
 $S:0}
@@ -102603,12 +102603,12 @@ B.KE=new A.r_(2,"top")
 B.pR=new A.r_(3,"center")
 B.KF=new A.r_(4,"bottom")
 B.pw=new A.bN(B.pp,null,B.af,null,null)
-B.a_1=new A.aO("Emergency Hotline",null,null,null,null,null,null,null,null)
+B.a_0=new A.aO("Emergency Hotline",null,null,null,null,null,null,null,null)
 B.Zw=new A.aO("999",null,null,null,null,null,null,null,null)
-B.KG=new A.vP(B.pw,B.a_1,B.Zw,null,!0,null,!1,null)
+B.KG=new A.vP(B.pw,B.a_0,B.Zw,null,!0,null,!1,null)
 B.ZW=new A.aO("Campus Counselling Unit",null,null,null,null,null,null,null,null)
-B.ZZ=new A.aO("+60 3-xxxx xxxx",null,null,null,null,null,null,null,null)
-B.KH=new A.vP(B.pw,B.ZW,B.ZZ,null,!0,null,!1,null)
+B.a_8=new A.aO("+60 3-11530-9988",null,null,null,null,null,null,null,null)
+B.KH=new A.vP(B.pw,B.ZW,B.a_8,null,!0,null,!1,null)
 B.pS=s(["text","multiline","number","phone","datetime","emailAddress","url","visiblePassword","name","address","none","webSearch","twitter"],t.s)
 B.pT=s([200,202],t.t)
 B.KK=s([239,191,189],t.t)
@@ -104206,8 +104206,8 @@ B.TS=new A.jU(5,"timeout")
 B.TT=new A.x7(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.ZI=new A.aO("Please write something first",null,null,null,null,null,null,null,null)
 B.TU=new A.ic(B.ZI,null,null,null,null,null,null,null,null,null,null,null,null,B.aO,!1,null,null,null,B.u,null)
-B.a__=new A.aO("Please use your QIU email (@qiu.edu.my)",null,null,null,null,null,null,null,null)
-B.Bl=new A.ic(B.a__,B.af,null,null,null,null,null,null,null,null,null,null,null,B.aO,!1,null,null,null,B.u,null)
+B.ZZ=new A.aO("Please use your QIU email (@qiu.edu.my)",null,null,null,null,null,null,null,null)
+B.Bl=new A.ic(B.ZZ,B.af,null,null,null,null,null,null,null,null,null,null,null,B.aO,!1,null,null,null,B.u,null)
 B.Zm=new A.aO("Profile updated successfully!",null,null,null,null,null,null,null,null)
 B.TV=new A.ic(B.Zm,B.lk,null,null,null,null,null,null,null,null,null,null,null,B.aO,!1,null,null,null,B.u,null)
 B.Zu=new A.aO("Journal entry saved \u2713",null,null,null,null,null,null,null,null)
@@ -104637,17 +104637,17 @@ B.ZV=new A.aO("If you are feeling overwhelmed, distressed, or unsafe, please rea
 B.X3=new A.n(!0,B.aa,null,null,null,null,16,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.ZX=new A.aO("View Past Entries",null,B.X3,null,null,null,null,null,null)
 B.ZY=new A.aO("Hi! I'm CompanionAI",null,B.BL,null,null,null,null,null,null)
-B.a_0=new A.aO("Are you sure you want to delete all messages? This cannot be undone.",null,null,null,null,null,null,null,null)
-B.a_2=new A.aO("Sign up with Google",null,B.BT,null,null,null,null,null,null)
+B.a__=new A.aO("Are you sure you want to delete all messages? This cannot be undone.",null,null,null,null,null,null,null,null)
+B.a_1=new A.aO("Sign up with Google",null,B.BT,null,null,null,null,null,null)
 B.VZ=new A.n(!0,B.j,null,null,null,null,14,B.kQ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_3=new A.aO("Daily Motivation",null,B.VZ,null,null,null,null,null,null)
+B.a_2=new A.aO("Daily Motivation",null,B.VZ,null,null,null,null,null,null)
 B.VK=new A.n(!0,B.cM,null,null,null,null,18,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_4=new A.aO("No journal entries yet",null,B.VK,null,null,null,null,null,null)
+B.a_3=new A.aO("No journal entries yet",null,B.VK,null,null,null,null,null,null)
 B.YG=new A.n(!0,null,null,null,null,null,22,B.az,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.a_5=new A.aO("Need Immediate Help?",null,B.YG,null,null,null,null,null,null)
-B.a_6=new A.aO("Are you sure you want to delete this entry?",null,null,null,null,null,null,null,null)
-B.a_7=new A.aO("Coming Soon!",null,null,null,null,null,null,null,null)
-B.a_8=new A.aO("Delete Message",null,null,null,null,null,null,null,null)
+B.a_4=new A.aO("Need Immediate Help?",null,B.YG,null,null,null,null,null,null)
+B.a_5=new A.aO("Are you sure you want to delete this entry?",null,null,null,null,null,null,null,null)
+B.a_6=new A.aO("Coming Soon!",null,null,null,null,null,null,null,null)
+B.a_7=new A.aO("Delete Message",null,null,null,null,null,null,null,null)
 B.a_9=new A.aO("Your personal mental health companion powered by AI.",null,null,null,null,null,null,null,null)
 B.a_a=new A.aO("Journal History",null,null,null,null,null,null,null,null)
 B.a_b=new A.aO("Delete Entry",null,null,null,null,null,null,null,null)
