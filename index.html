@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="CompanionAI - Your Mental Health Companion">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="CompanionAI">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CompanionAI</title>
+  <link rel="manifest" href="manifest.json">
+  
+  <script>
+    window.addEventListener('load', function(ev) {
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Firebase SDKs (Version 10.7.0 - compatible with your Firebase packages) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+  <!-- Firebase Configuration -->
+  <script>
+    // TODO: Replace with your Firebase config
+    const firebaseConfig = {
+  apiKey: "AIzaSyAC2IHAaTJObFGSpTcgPZGYjOkyyhgJcWQ",
+  authDomain: "companionai1.firebaseapp.com",
+  projectId: "companionai1",
+  storageBucket: "companionai1.firebasestorage.app",
+  messagingSenderId: "219921491471",
+  appId: "1:219921491471:web:f242e20cdae500a799a57a",
+  measurementId: "G-HWMKRECT4L"
+};
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

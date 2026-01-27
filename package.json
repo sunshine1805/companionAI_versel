@@ -1,8 +1,13 @@
 {
-  "name": "companionai-backend",
+  "name": "companion-ai-backend",
   "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "openai": "^4.20.1"
+  "description": "CompanionAI Backend API using OpenAI",
+  "main": "api/chat.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
