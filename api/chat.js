@@ -86,6 +86,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`CompanionAI backend running on port ${PORT}`);
 });
+export default async function handler(req, res) {
+  res.status(200).json({ reply: "Backend is alive" });
+}
+
 
 setGlobalOptions({ maxInstances: 10 });
 
