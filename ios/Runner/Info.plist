@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Companion Ai</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>companion_ai</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(FLUTTER_BUILD_NAME)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>This app needs microphone access for voice input in chat and journal</string>
+    
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>This app needs speech recognition to convert your voice to text</string>
+    
+	Website setup with images and Google sign-inSharechat_page.dart657 linesdarthome_page.dart446 linesdartselfcare_page.dart376 linesdartsignup_page.dart341 linesdartlogin_page.dart294 linesdartand the backgound "background.png"  is also not inputted and the homepage also I need to insert my logo image "logo.png" , now it's showing some random heart I don't want that  and for sign in / sign up I need google sign in as well like user can direct sign in using google for self resource I want to show user the picture as well for the videos; like the cover page of the video/ article.8:44 AMI'll help you fix these issues. Let me create updated versions of your files with proper image handling and Google Sign-In integration.Updated Home Page with Background & LogoCode import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'chat_page.dart';
+import 'journal_page.dart';
+import 'profile_page.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @ovUpdated Chat Page with Logo FixCode import 'dart:convert';
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'api.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Now let me create the updated login page with Google Sign-In:Login Page with Google Sign-InCode import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+class LoginPage extNow let me create the updated signup page with Google Sign-In:Signup Page with Google Sign-InCode import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
+  @override
+  State<SignupPagNow let me create the updated self-care page with video thumbnails:Self-Care Page with Video ThumbnailsCode import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+class SelfCarePage extends StatelessWidget {
+  const SelfCarePage({super.key});
+
+  Future<void>Perfect! Now let me create a setup guide document for you:Setup Instructions for Images & Google Sign-InDocument # Setup Instructions for CompanionAI Updates
+
+## 📁 Required Images
+
+You need to add these images to your project:
+
+### 1. Background Image
+- **File**: `background.png`
+- **Location**: `assets/images/background.png`
+- **Purpose**: Background for logiPerfect! I've created comprehensive updates for your CompanionAI app. Here's what I've done:
+🎯 Summary of Changes
+1. Home Page - Now with Background & Logo
+
+Added background.png image support
+Fixed logo display (no more random heart icon)
+Added gradient overlay for better text readability
+
+2. Chat Page - Logo Integration
+
+Created reusable logo avatar widget
+Logo now shows consistently in app bar, message bubbles, and typing indicator
+Proper fallback if image fails to load
+
+3. Login Page - Google Sign-In Added
+
+Google Sign-In button with logo
+Background image support
+Email validation for QIU domain
+Clean UI with divider between options
+
+4. Signup Page - Google Sign-In Added
+
+Same Google Sign-In functionality
+Background image support
+Maintains email validation
+
+5. Self-Care Page - Video Thumbnails
+
+Automatic YouTube thumbnail loading
+Uses cached_network_image for better performance
+Shows play button overlay on thumbnails
+Article images support (optional)
+Proper loading and error states
+
+📋 What You Need To Do
+1. Add Dependencies
+bashflutter pub add google_sign_in
+flutter pub add cached_network_image
+2. Add Your Images
+Place these files in your project:
+
+assets/images/background.png - Your background image
+assets/images/logo.png - Your app logo
+assets/images/google_logo.png - (Optional) Google logo
+
+3. Configure Google Sign-In
+Follow the setup instructions in the documentation I created - you'll need to:
+
+Enable Google Sign-In in Firebase Console
+Add SHA-1 certificate (Android)
+Configure REVERSED_CLIENT_ID (iOS)
+
+4. Update pubspec.yaml
+Add the assets section as shown in the setup guide.
+🎨 Features
+✅ Background images on all main pages
+✅ Logo displays correctly everywhere
+✅ Google Sign-In with QIU email validation
+✅ YouTube video thumbnails with play buttons
+✅ Article images (where available)
+✅ Proper loading states and error handling
+✅ Consistent UI design
+All the code includes proper error handling and fallbacks, so even if images fail to load, your app will still work gracefully!how to deploy the front end as well on the vercel. so my whole app is deployed and can use link to use.10:05 AMDeploy Flutter Web App to Vercel - Complete GuideDocument # Deploy Flutter Web App to Vercel - Complete Guide
+
+## 🎯 Overview
+
+You'll deploy your Flutter app as a web application on Vercel alongside your existing backend API. This allows users to access your app via a web browser.
+
+---
+
+## 📁 Project StructI've created a comprehensive guide for deploying your Flutter app to Vercel as a web application! Here's the quick summary:
+🎯 What This Does
+Your Flutter mobile app will become accessible via web browser at a URL like https://companion-ai.vercel.app, where anyone can:
+
+Access your app from any device
+Sign in with Google
+Use all features through the browser
+No app store download needed!
+
+📋 Quick Steps
+
+Enable Web Support
+
+bash   flutter config --enable-web
+
+Build for Web
+
+bash   flutter build web --release
+
+Copy to Your Backend Repo
+
+bash   cp -r build/web/* path/to/companion-ai-versel/
+
+Update vercel.json (configuration provided in the guide)
+Deploy
+
+bash   git push origin main
+🎨 Key Benefits
+
+✅ Same codebase - One Flutter project for mobile AND web
+✅ Easy deployment - Just build and copy files
+✅ Auto-deploy - Connected to GitHub for automatic updates
+✅ Progressive Web App - Users can "install" on their phones
+✅ Cost-effective - Free hosting on Vercel
+
+🔥 Important Updates Needed
+
+Change API URLs in your Flutter code from full URLs to relative paths:
+
+dart   // Change from:
+   Uri.parse("https://companion-ai-versel.vercel.app/api/chat")
+   
+   // To:
+   Uri.parse("/api/chat")
+
+Add Firebase web config in web/index.html
+Configure Google Sign-In for your web domain
+
+The guide includes everything you need including troubleshooting, optimization tips, and a deployment checklist!
+Would you like me to help you with any specific step or create additional configuration files?Claude is AI and can make mistakes. Please double-check responses. Sonnet 4.5Claude is AI and can make mistakes. Please double-check responses.CopyPublishSetup Instructions for CompanionAI Updates
+📁 Required Images
+You need to add these images to your project:
+1. Background Image
+
+File: background.png
+Location: assets/images/background.png
+Purpose: Background for login and home pages
+Recommended size: 1080x1920 or similar mobile-friendly resolution
+
+2. Logo Image
+
+File: logo.png
+Location: assets/images/logo.png
+Purpose: App logo displayed throughout the app
+Recommended size: 512x512 (square, transparent background preferred)
+
+3. Google Logo (Optional)
+
+File: google_logo.png
+Location: assets/images/google_logo.png
+Purpose: Google Sign-In button icon
+Download from: Google Brand Resources
+Alternative: The code has a fallback icon if this is missing
+
+
+📝 Update pubspec.yaml
+Add the following dependencies and asset declarations:
+yamldependencies:
+  flutter:
+    sdk: flutter
+  firebase_core: ^2.24.0
+  firebase_auth: ^4.15.0
+  cloud_firestore: ^4.13.0
+  google_sign_in: ^6.1.6  # ADD THIS
+  cached_network_image: ^3.3.0  # ADD THIS
+  url_launcher: ^6.2.2
+  http: ^1.1.2
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/logo.png
+    - assets/images/background.png
+    - assets/images/google_logo.png  # Optional
+
+🔧 Google Sign-In Setup
+Step 1: Firebase Console Setup
+
+Go to Firebase Console
+Select your project
+Navigate to Authentication → Sign-in method
+Enable Google as a sign-in provider
+Add your support email
+
+Step 2: Android Setup
+File: android/app/build.gradle
+gradleandroid {
+    defaultConfig {
+        // ... other configs
+        minSdkVersion 21  // Make sure this is at least 21
+    }
+}
+File: android/app/src/main/AndroidManifest.xml
+Add internet permission if not already present:
+xml<manifest>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- ... rest of manifest -->
+</manifest>
+Step 3: iOS Setup
+File: ios/Runner/Info.plist
+Add the following inside the <dict> tag:
+xml<!-- Google Sign-In -->
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <!-- Replace with your REVERSED_CLIENT_ID from GoogleService-Info.plist -->
+            <string>com.googleusercontent.apps.YOUR-CLIENT-ID</string>
+        </array>
+
+    </dict>
+</array>
+</dict>
+</plist>
