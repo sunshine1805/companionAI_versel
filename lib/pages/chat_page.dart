@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:permission_handler/permission_handler.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -21,12 +20,11 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
   bool _isTyping = false;
   bool _isLoading = true;
   late AnimationController _animationController;
-  
+
   // Voice input
-  late stt.SpeechToText _speech;
   bool _isListening = false;
   String _voiceText = '';
-  
+
   // Chat sessions
   String? _currentSessionId;
   List<Map<String, dynamic>> _chatSessions = [];
@@ -49,7 +47,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     )..repeat();
-    _speech = stt.SpeechToText();
     loadChatSessions();
   }
 
@@ -64,6 +61,36 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
   String getRandomQuote() {
     return motivationalQuotes[Random().nextInt(motivationalQuotes.length)];
   }
+
+  // ── Voice: Web Speech API via dart:js ──────────────────────────────────────
+
+  void _startListening() {
+    setState(() {
+      _isListening = true;
+      _voiceText = '';
+    });
+
+    js.context.callMethod('startSpeechRecognition', [
+      js.allowInterop((String transcript) {
+        if (mounted) {
+          setState(() {
+            _voiceText = transcript;
+            _controller.text = transcript;
+          });
+        }
+      }),
+      js.allowInterop(() {
+        if (mounted) setState(() => _isListening = false);
+      }),
+    ]);
+  }
+
+  void _stopListening() {
+    js.context.callMethod('stopSpeechRecognition', []);
+    setState(() => _isListening = false);
+  }
+
+  // ──────────────────────────────────────────────────────────────────────────
 
   Future<void> loadChatSessions() async {
     final user = FirebaseAuth.instance.currentUser;
@@ -89,8 +116,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
             'message_count': doc['message_count'] ?? 0,
           };
         }).toList();
-        
-        // Load most recent session or create new
+
         if (_chatSessions.isNotEmpty) {
           _currentSessionId = _chatSessions[0]['id'];
           loadSessionMessages(_currentSessionId!);
@@ -161,7 +187,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         _isLoading = false;
       });
 
-      loadChatSessions(); // Reload sessions list
+      loadChatSessions();
     } catch (e) {
       print('Error creating session: $e');
       _showError('Failed to create new chat: $e');
@@ -178,54 +204,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         );
       });
     }
-  }
-
-  Future<void> _startListening() async {
-    // Request microphone permission
-    var status = await Permission.microphone.request();
-    if (!status.isGranted) {
-      _showError('Microphone permission denied');
-      return;
-    }
-
-    bool available = await _speech.initialize(
-      onStatus: (status) {
-        print('Speech status: $status');
-        if (status == 'done' || status == 'notListening') {
-          setState(() => _isListening = false);
-        }
-      },
-      onError: (error) {
-        print('Speech error: $error');
-        setState(() => _isListening = false);
-        _showError('Voice input error: ${error.errorMsg}');
-      },
-    );
-
-    if (available) {
-      setState(() {
-        _isListening = true;
-        _voiceText = '';
-      });
-
-      _speech.listen(
-        onResult: (result) {
-          setState(() {
-            _voiceText = result.recognizedWords;
-            _controller.text = _voiceText;
-          });
-        },
-        listenFor: const Duration(seconds: 30),
-        pauseFor: const Duration(seconds: 3),
-      );
-    } else {
-      _showError('Speech recognition not available');
-    }
-  }
-
-  Future<void> _stopListening() async {
-    await _speech.stop();
-    setState(() => _isListening = false);
   }
 
   Future<void> sendMessage(String text) async {
@@ -247,7 +225,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         'timestamp': FieldValue.serverTimestamp(),
       });
 
-      // Update session title if this is the first message
       if (_messages.isEmpty) {
         final title = text.length > 30 ? '${text.substring(0, 30)}...' : text;
         await sessionRef.update({'title': title});
@@ -265,7 +242,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           : _messages;
 
       final apiUrl = "https://companion-ai-versel.vercel.app/api/chat";
-      
+
       final response = await http.post(
         Uri.parse(apiUrl),
         headers: {"Content-Type": "application/json"},
@@ -283,7 +260,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           'timestamp': FieldValue.serverTimestamp(),
         });
 
-        // Update session metadata
         await sessionRef.update({
           'last_updated': FieldValue.serverTimestamp(),
           'message_count': FieldValue.increment(2),
@@ -369,12 +345,13 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                       itemBuilder: (context, index) {
                         final session = _chatSessions[index];
                         final isActive = session['id'] == _currentSessionId;
-                        
+
                         return ListTile(
                           selected: isActive,
-                          selectedTileColor: const Color(0xFF9C88D9).withOpacity(0.1),
+                          selectedTileColor:
+                              const Color(0xFF9C88D9).withOpacity(0.1),
                           leading: CircleAvatar(
-                            backgroundColor: isActive 
+                            backgroundColor: isActive
                                 ? const Color(0xFF9C88D9)
                                 : Colors.grey[300],
                             child: Icon(
@@ -388,7 +365,9 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                              fontWeight: isActive
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                           subtitle: Text(
@@ -396,7 +375,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                             style: const TextStyle(fontSize: 12),
                           ),
                           trailing: IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red, size: 20),
+                            icon: const Icon(Icons.delete,
+                                color: Colors.red, size: 20),
                             onPressed: () => _deleteSession(session['id']),
                           ),
                           onTap: () {
@@ -418,7 +398,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
     if (user == null) return;
 
     try {
-      // Delete all messages in session
       final messages = await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
@@ -431,7 +410,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         await doc.reference.delete();
       }
 
-      // Delete session
       await FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
@@ -439,7 +417,6 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           .doc(sessionId)
           .delete();
 
-      // If deleted current session, load or create new one
       if (sessionId == _currentSessionId) {
         await loadChatSessions();
       } else {
@@ -532,7 +509,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add_circle_outline, color: Color(0xFF9C88D9)),
+            icon: const Icon(Icons.add_circle_outline,
+                color: Color(0xFF9C88D9)),
             tooltip: 'New chat',
             onPressed: _createNewSession,
           ),
@@ -568,7 +546,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
                             itemBuilder: (context, index) {
                               final msg = _messages[index];
                               final isUser = msg['role'] == 'user';
-                              return _buildMessageBubble(msg['text']!, isUser);
+                              return _buildMessageBubble(
+                                  msg['text']!, isUser);
                             },
                           ),
                   ),
@@ -594,6 +573,11 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
               _voiceText.isEmpty ? 'Listening...' : _voiceText,
               style: const TextStyle(fontSize: 15),
             ),
+          ),
+          TextButton(
+            onPressed: _stopListening,
+            child: const Text('Stop',
+                style: TextStyle(color: Color(0xFF9C88D9))),
           ),
         ],
       ),
@@ -716,7 +700,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           ],
           Flexible(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 gradient: isUser
                     ? const LinearGradient(
@@ -763,7 +748,8 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           _buildLogoAvatar(),
           const SizedBox(width: 8),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -797,7 +783,7 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
         final delay = index * 0.2;
         final value = ((_animationController.value - delay) % 1.0);
         final opacity = (sin(value * pi * 2) + 1) / 2;
-        
+
         return Opacity(
           opacity: opacity * 0.5 + 0.5,
           child: Container(
@@ -832,15 +818,17 @@ class _ChatPageState extends State<ChatPage> with SingleTickerProviderStateMixin
           // Voice input button
           Container(
             decoration: BoxDecoration(
-              color: _isListening 
-                  ? const Color(0xFF9C88D9) 
+              color: _isListening
+                  ? const Color(0xFF9C88D9)
                   : const Color(0xFFF5F0FF),
               shape: BoxShape.circle,
             ),
             child: IconButton(
               icon: Icon(
                 _isListening ? Icons.mic : Icons.mic_none,
-                color: _isListening ? Colors.white : const Color(0xFF9C88D9),
+                color: _isListening
+                    ? Colors.white
+                    : const Color(0xFF9C88D9),
               ),
               onPressed: _isListening ? _stopListening : _startListening,
               tooltip: _isListening ? 'Stop recording' : 'Voice input',

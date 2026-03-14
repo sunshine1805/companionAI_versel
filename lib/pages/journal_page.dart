@@ -1,9 +1,8 @@
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'package:permission_handler/permission_handler.dart';
 
 class JournalPage extends StatefulWidget {
   const JournalPage({super.key});
@@ -15,16 +14,9 @@ class JournalPage extends StatefulWidget {
 class _JournalPageState extends State<JournalPage> {
   final TextEditingController _controller = TextEditingController();
   bool _isSaving = false;
-  
-  // Voice input
-  late stt.SpeechToText _speech;
-  bool _isListening = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _speech = stt.SpeechToText();
-  }
+  // Voice input
+  bool _isListening = false;
 
   @override
   void dispose() {
@@ -32,46 +24,31 @@ class _JournalPageState extends State<JournalPage> {
     super.dispose();
   }
 
-  Future<void> _startListening() async {
-    var status = await Permission.microphone.request();
-    if (!status.isGranted) {
-      _showError('Microphone permission denied');
-      return;
-    }
+  // ── Voice: Web Speech API via dart:js ──────────────────────────────────────
 
-    bool available = await _speech.initialize(
-      onStatus: (status) {
-        if (status == 'done' || status == 'notListening') {
-          setState(() => _isListening = false);
-        }
-      },
-      onError: (error) {
-        setState(() => _isListening = false);
-        _showError('Voice input error: ${error.errorMsg}');
-      },
-    );
+  void _startListening() {
+    setState(() => _isListening = true);
 
-    if (available) {
-      setState(() => _isListening = true);
-
-      _speech.listen(
-        onResult: (result) {
+    js.context.callMethod('startSpeechRecognition', [
+      js.allowInterop((String transcript) {
+        if (mounted) {
           setState(() {
-            _controller.text = result.recognizedWords;
+            _controller.text = transcript;
           });
-        },
-        listenFor: const Duration(seconds: 60),
-        pauseFor: const Duration(seconds: 5),
-      );
-    } else {
-      _showError('Speech recognition not available');
-    }
+        }
+      }),
+      js.allowInterop(() {
+        if (mounted) setState(() => _isListening = false);
+      }),
+    ]);
   }
 
-  Future<void> _stopListening() async {
-    await _speech.stop();
+  void _stopListening() {
+    js.context.callMethod('stopSpeechRecognition', []);
     setState(() => _isListening = false);
   }
+
+  // ──────────────────────────────────────────────────────────────────────────
 
   void _showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -244,7 +221,7 @@ class _JournalPageState extends State<JournalPage> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: _isListening 
+                            color: _isListening
                                 ? const Color(0xFF9C88D9)
                                 : const Color(0xFFF5F0FF),
                             shape: BoxShape.circle,
@@ -252,12 +229,15 @@ class _JournalPageState extends State<JournalPage> {
                           child: IconButton(
                             icon: Icon(
                               _isListening ? Icons.mic : Icons.mic_none,
-                              color: _isListening 
-                                  ? Colors.white 
+                              color: _isListening
+                                  ? Colors.white
                                   : const Color(0xFF9C88D9),
                             ),
-                            onPressed: _isListening ? _stopListening : _startListening,
-                            tooltip: _isListening ? 'Stop recording' : 'Voice input',
+                            onPressed:
+                                _isListening ? _stopListening : _startListening,
+                            tooltip: _isListening
+                                ? 'Stop recording'
+                                : 'Voice input',
                           ),
                         ),
                       ],
@@ -335,7 +315,7 @@ class _JournalPageState extends State<JournalPage> {
   }
 }
 
-// Journal History Page (same as before)
+// Journal History Page
 class JournalHistoryPage extends StatelessWidget {
   const JournalHistoryPage({super.key});
 
@@ -402,7 +382,8 @@ class JournalHistoryPage extends StatelessWidget {
                     final text = data['text'] ?? '';
                     final timestamp = data['timestamp'] as Timestamp?;
                     final dateStr = timestamp != null
-                        ? DateFormat('MMM dd, yyyy • hh:mm a').format(timestamp.toDate())
+                        ? DateFormat('MMM dd, yyyy • hh:mm a')
+                            .format(timestamp.toDate())
                         : 'Just now';
 
                     return Card(
